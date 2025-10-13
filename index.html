@@ -55,22 +55,38 @@
   <canvas id="bgCanvas" class="no-pointer"></canvas>
 
   <!-- Header -->
-    <header class="flex items-center justify-between px-6 md:px-10 py-5 bg-black/20 backdrop-blur sticky top-0 z-50">
+  <header class="flex items-center justify-between px-6 md:px-10 py-5 bg-black/20 backdrop-blur sticky top-0 z-[100]">
     <!-- Logo -->
-    <div class="flex items-center gap-3">
-        <div class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-luxe-accent to-luxe-glow bg-clip-text text-transparent">
-        LumiLink
-        </div>
+    <div class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-luxe-accent to-luxe-glow bg-clip-text text-transparent">
+      LumiLink
     </div>
 
-    <!-- Centered nav -->
-    <nav class="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center gap-8 text-gray-300">
-        <a href="#about" class="hover:text-white">About</a>
-        <a href="#process" class="hover:text-white">Process</a>
-        <a href="#carousel" class="hover:text-white">Showcase</a>
-        <a href="#contact" class="hover:text-white">Contact</a>
+    <!-- Desktop Nav -->
+    <nav class="hidden lg:flex items-center gap-8 text-gray-300">
+      <a href="#about" class="hover:text-white transition-colors">About</a>
+      <a href="#process" class="hover:text-white transition-colors">Process</a>
+      <a href="#carousel" class="hover:text-white transition-colors">Showcase</a>
+      <a href="#contact" class="hover:text-white transition-colors">Contact</a>
     </nav>
-    </header>
+
+    <!-- Hamburger -->
+    <button id="menu-btn" class="lg:hidden flex flex-col gap-1.5 w-8 h-8 justify-center items-center focus:outline-none z-[110]">
+      <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+      <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+      <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+    </button>
+  </header>
+
+  <!-- Mobile Dropdown Menu -->
+  <nav
+    id="mobile-menu"
+    class="fixed top-[70px] left-0 w-full bg-black/20 backdrop-blur text-white flex flex-col items-center gap-6 py-8 opacity-0 -translate-y-3 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] z-[200]"
+  >
+    <a href="#about" class="text-lg hover:text-luxe-accent transition-all" onclick="toggleMenu()">About</a>
+    <a href="#process" class="text-lg hover:text-luxe-accent transition-all" onclick="toggleMenu()">Process</a>
+    <a href="#carousel" class="text-lg hover:text-luxe-accent transition-all" onclick="toggleMenu()">Showcase</a>
+    <a href="#contact" class="text-lg hover:text-luxe-accent transition-all" onclick="toggleMenu()">Contact</a>
+  </nav>
 
   <!-- Hero -->
   <section class="text-center py-20 md:py-32 relative">
@@ -208,6 +224,36 @@
 
   <!-- JS: Particles + Counters -->
   <script>
+
+  const menuBtn = document.getElementById("menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  let menuOpen = false;
+
+  function toggleMenu() {
+    menuOpen = !menuOpen;
+
+    if (menuOpen) {
+      mobileMenu.classList.remove("opacity-0", "-translate-y-3", "pointer-events-none");
+      mobileMenu.classList.add("opacity-100", "translate-y-0");
+    } else {
+      mobileMenu.classList.add("opacity-0", "-translate-y-3", "pointer-events-none");
+      mobileMenu.classList.remove("opacity-100", "translate-y-0");
+    }
+
+    const bars = menuBtn.querySelectorAll("span");
+    if (menuOpen) {
+      bars[0].classList.add("rotate-45", "translate-y-2");
+      bars[1].classList.add("opacity-0");
+      bars[2].classList.add("-rotate-45", "-translate-y-2");
+    } else {
+      bars.forEach((b) =>
+        b.classList.remove("rotate-45", "-rotate-45", "translate-y-2", "-translate-y-2", "opacity-0")
+      );
+    }
+  }
+
+  menuBtn.addEventListener("click", toggleMenu);
+
     // Particle Background
 const canvas = document.getElementById('bgCanvas');
 const ctx = canvas.getContext('2d');
