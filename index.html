@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,6 +45,19 @@
         to { transform: translateX(-50%); }
     }
 
+    #menu-btn .bar {
+  transition: all 0.3s cubic-bezier(.4,0,.2,1);
+}
+#menu-btn.open .top {
+  transform: translateY(8px) rotate(45deg);
+}
+#menu-btn.open .middle {
+  opacity: 0;
+}
+#menu-btn.open .bottom {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
   </style>
   
 </head>
@@ -71,10 +83,10 @@
 
     <!-- Hamburger -->
     <button id="menu-btn" class="lg:hidden flex flex-col gap-1.5 w-8 h-8 justify-center items-center focus:outline-none z-[110]">
-      <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
-      <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
-      <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
-    </button>
+  <span class="bar top w-6 h-0.5 bg-white transition-all duration-300"></span>
+  <span class="bar middle w-6 h-0.5 bg-white transition-all duration-300"></span>
+  <span class="bar bottom w-6 h-0.5 bg-white transition-all duration-300"></span>
+</button>
   </header>
 
   <!-- Mobile Dropdown Menu -->
@@ -89,21 +101,21 @@
   </nav>
 
   <!-- Hero -->
-  <section class="text-center py-20 md:py-32 relative">
-        <h1 class="text-5xl md:text-7xl font-extrabold leading-tight bg-gradient-to-r from-luxe-accent via-white to-luxe-glow bg-clip-text text-transparent drop-shadow">
+  <section class="text-center py-20 md:py-32 relative px-6 md:px-0">
+    <h1 class="text-4xl md:text-7xl font-extrabold leading-tight bg-gradient-to-r from-luxe-accent via-white to-luxe-glow bg-clip-text text-transparent drop-shadow max-w-2xl mx-auto">
         We Turn Trends Into Profits
-        </h1>
-        <p class="mt-5 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-
+    </h1>
+    <p class="mt-5 text-base md:text-xl text-gray-300 max-w-xl mx-auto">
         We spot the hottest digital product trends, create stunning ready-to-sell versions in days,
         and partner with creators on <span class="text-luxe-accent font-semibold">generous commissions.</span>
-        </p>
-        <div class="mt-8 flex justify-center gap-4">
+    </p>
+    <div class="mt-8 flex justify-center gap-4">
         <a href="#contact" class="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition">Become a Partner</a>
-    </section>
+    </div>
+</section>
 
     <!-- About -->
-    <section id="about" class="py-16 md:py-24 px-6 md:px-10 max-w-6xl mx-auto text-center">
+    <section id="about" class="py-16 md:py-24 px-8 md:px-10 max-w-6xl mx-auto text-center">
         <h2 class="text-3xl md:text-4xl font-bold mb-6">Who We Are</h2>
         <p class="text-gray-300 max-w-3xl mx-auto">
         LumiLink is a creative studio launching viral, downloadable products across multiple core niches. Built for Gen Z & young Millennials, crafted to convert, and scaled with creators.
@@ -111,7 +123,7 @@
   </section>
 
     <!-- Process -->
-    <section id="process" class="py-16 md:py-24 bg-black/30 backdrop-blur px-6 md:px-10">
+    <section id="process" class="py-16 md:py-24 bg-black/30 backdrop-blur px-8 md:px-10">
     <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Our 3-Step Formula</h2>
     
     <!-- Steps -->
@@ -235,20 +247,11 @@
     if (menuOpen) {
       mobileMenu.classList.remove("opacity-0", "-translate-y-3", "pointer-events-none");
       mobileMenu.classList.add("opacity-100", "translate-y-0");
+      menuBtn.classList.add("open");
     } else {
       mobileMenu.classList.add("opacity-0", "-translate-y-3", "pointer-events-none");
       mobileMenu.classList.remove("opacity-100", "translate-y-0");
-    }
-
-    const bars = menuBtn.querySelectorAll("span");
-    if (menuOpen) {
-      bars[0].classList.add("rotate-45", "translate-y-2");
-      bars[1].classList.add("opacity-0");
-      bars[2].classList.add("-rotate-45", "-translate-y-2");
-    } else {
-      bars.forEach((b) =>
-        b.classList.remove("rotate-45", "-rotate-45", "translate-y-2", "-translate-y-2", "opacity-0")
-      );
+      menuBtn.classList.remove("open");
     }
   }
 
@@ -406,10 +409,10 @@ animate();
     const items = [
         { label: "display Cover.png", type: "img" },
         { label: "cover.jpg", type: "img" },
-        { label: "[Journal Theme] Ongoing production", type: "text" },
-        { label: "[Finance Log] Ongoing production", type: "text" },
-        { label: "[Habit System] Ongoing production", type: "text" },
-        { label: "[Aesthetic Pack] Ongoing production", type: "text" },
+        { label: "Lunch-Cover.png", type: "img" },
+        { label: "Free.png", type: "img" },
+        { label: "Fashion-Cover.png", type: "img" },
+        { label: "AI - Digital Product.png", type: "img" },
         { label: "[Planner Mockup] Ongoing production", type: "text" }
     ];
 
